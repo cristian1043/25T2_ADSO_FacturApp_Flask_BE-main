@@ -1,22 +1,15 @@
 from sqlalchemy import create_engine
-from sqlalchemy.orm import declarative_base, sessionmaker
+from sqlalchemy.orm import sessionmaker, declarative_base
+import pymysql
 
-# Configuración de la conexión
-DATABASE_URL = "mysql+pymysql://root@localhost:3306/FacturApp_25T2_PY?charset=utf8mb4"
+engine = create_engine("mysql+pymysql://root@localhost:3306/FacturApp_25T2_PY?charset=utf8mb4")
 
-# Motor de conexión
-engine = create_engine(
-    DATABASE_URL,
-    echo=True,
-    future=True
-)
+connection = engine.connect()
 
-# Sesión
-SessionLocal = sessionmaker(
-    bind=engine,
-    autoflush=False,
-    autocommit=False
-)
+Session = sessionmaker(bind=engine)
 
-# Base para todos los modelos
+session = Session()
+
 Base = declarative_base()
+
+Base.metadata.bind = engine
