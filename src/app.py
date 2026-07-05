@@ -13,6 +13,7 @@ from src.models.detalle_facturas import DetalleFacturas
 from src.models.compras import Compras
 from src.models.detalle_compras import DetalleCompras
 
+
 Base.metadata.create_all(bind=engine)
 
 app = Flask(__name__)
@@ -20,4 +21,3 @@ app = Flask(__name__)
 
 if __name__ == '__main__':
     app.run(debug=True)
-
