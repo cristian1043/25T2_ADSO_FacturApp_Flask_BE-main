@@ -18,6 +18,10 @@ Base.metadata.create_all(bind=engine)
 
 app = Flask(__name__)
 
+@app.route("/")
+def inicio():
+    return "Backend funcionando"
 
 if __name__ == '__main__':
     app.run(debug=True)
+
