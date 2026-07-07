@@ -1,6 +1,8 @@
 {
     "version": "0.2.0",
     "configurations": [
+        
+
         {
             "name": "PYMES.SOFT",
             "type": "debugpy",
@@ -11,7 +13,9 @@
                 "FLASK_DEBUG": "1"
             },
             "args": [
-                "run"
+                "run",
+                "--no-debugger",
+                "--no-reload"
             ],
             "jinja": true,
             "cwd": "${workspaceFolder}"
