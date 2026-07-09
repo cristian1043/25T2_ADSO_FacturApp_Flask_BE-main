@@ -34,6 +34,7 @@ from src.routes.web.compras import compras
 from src.routes.web.reportes import reportes
 
 #registrar las rutas de la aplicación
+register_routes(app)
 
 if __name__ == '__main__':
     app.run(debug=True)
