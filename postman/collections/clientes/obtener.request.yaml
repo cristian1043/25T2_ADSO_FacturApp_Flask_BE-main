@@ -2,4 +2,19 @@ $kind: http-request
 name: obtener
 url: http://127.0.0.1:5000/api/clientes
 method: GET
+body:
+  type: json
+  content: "{\r
+
+    \    \"documento\": \"123456789\",\r
+
+    \    \"nombre\": \"Cristian\",\r
+
+    \    \"direccion\": \"Bogotá\",\r
+
+    \    \"telefono\": \"3001234567\",\r
+
+    \    \"email\": \"cristian@test.com\"\r
+
+    }"
 order: 1784237063841

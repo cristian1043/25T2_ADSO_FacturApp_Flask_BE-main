@@ -48,7 +48,7 @@ def update_cliente(id):
     cliente = ClientesController.update(id, data)
 
     if cliente:
-        return jsonify(cliente), 200
+        return jsonify(cliente.to_dict()), 200
 
     return jsonify({
         "mensaje": "Cliente no encontrado"
