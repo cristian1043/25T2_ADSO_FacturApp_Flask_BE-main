@@ -34,6 +34,7 @@ class ClientesController:
         cliente.direccion = data["direccion"]
         cliente.telefono = data["telefono"]
         cliente.email = data["email"]
+        
         cliente.update()
 
         return cliente
