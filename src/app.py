@@ -1,5 +1,4 @@
 from flask import Flask
-from flask import FlaskControllerRegister
 from src.models import Base, engine
 
 #importar los modelos para que se registren en la base de datos
@@ -19,17 +18,44 @@ from src.models.compras import Compras
 from src.models.detalle_compras import DetalleCompras
 
 
-from src.routes.api import categorias_api, clientes_api, productos_api, proveedores_api, roles_api, usuarios_api, metodos_pago_api, facturas_api, detalle_facturas_api, compras_api, detalle_compras_api
 #crear todas las tablas en la base de datos
 
 Base.metadata.create_all(bind=engine)
 
+
 app = Flask(__name__)
 
-#importar las rutas de la aplicación
+from src.routes import (
+    categorias_bp,
+    clientes_bp, 
+    productos_bp, 
+    proveedores_bp, 
+    roles_bp, 
+    usuarios_bp, 
+    facturas_bp, 
+    detalle_facturas_bp, 
+    compras_bp, 
+    detalle_compras_bp
+)
 
-register_controllers = FlaskControllerRegister(app)
-register_controllers.register.package('src.controllers')
+app.register_blueprint(
+    categorias_bp,
+    url_prefix="/api/categorias"
+)
+
+
+
+# Register all blueprints
+
+app.register_blueprint(clientes_bp, url_prefix="/api/clientes")
+app.register_blueprint(productos_bp, url_prefix="/api/productos")
+app.register_blueprint(proveedores_bp, url_prefix="/api/proveedores")
+app.register_blueprint(roles_bp, url_prefix="/api/roles")
+app.register_blueprint(usuarios_bp, url_prefix="/api/usuarios")
+app.register_blueprint(facturas_bp, url_prefix="/api/facturas")
+app.register_blueprint(detalle_facturas_bp, url_prefix="/api/detalle_facturas")
+app.register_blueprint(compras_bp, url_prefix="/api/compras")
+app.register_blueprint(detalle_compras_bp, url_prefix="/api/detalle_compras")
 
 if __name__ == '__main__':
     app.run(debug=True)
