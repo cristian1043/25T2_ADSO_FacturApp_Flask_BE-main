@@ -1,0 +1,4 @@
+$kind: http-request
+url: http://127.0.0.1:5000/api/clientes/
+method: PUT
+order: 4257502549618927

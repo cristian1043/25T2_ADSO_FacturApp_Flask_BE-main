@@ -11,4 +11,29 @@ class Clientes(Base):
     direccion = Column(String(255), nullable=False)
     telefono = Column(String(20), nullable=False)
     email = Column(String(255), unique=True, nullable=False)
-    created_at = Column(DateTime, default=date.today)
+    created_at = Column(DateTime, default=date.today) 
+
+    def save(self):
+        session.add(self)
+        session.commit()
+
+    @staticmethod
+    def get():
+        return session.query(Clientes).all()
+
+    @staticmethod
+    def get_by_id(id):
+        return session.query(Clientes).filter_by(id=id).first()
+
+    def update(self):
+        session.commit()
+    
+    def delete(self):
+        session.delete(self)
+        session.commit()
+   
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "nombre": self.nombre
+        }

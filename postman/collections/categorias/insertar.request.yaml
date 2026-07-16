@@ -1,0 +1,12 @@
+$kind: http-request
+name: insertar
+url: http://127.0.0.1:5000/api/categorias
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \    \"nombre\": \"Verduras\"\r
+
+    }"
+order: 4433890884401814

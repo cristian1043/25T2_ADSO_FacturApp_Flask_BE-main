@@ -1,0 +1,6 @@
+$kind: http-request
+name: obtener
+url: http://127.0.0.1:5000/api/categorias
+method: GET
+examples: .resources/obtener.resources/examples
+order: 1784229677608
