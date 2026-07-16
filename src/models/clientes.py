@@ -7,7 +7,7 @@ class Clientes(Base):
  
     id = Column(Integer, primary_key=True)
     documento = Column(String(50), unique=True, nullable=False)
-    nombre = Column(String(255), nullable=False)
+    nombre = Column(String(100), nullable=False)
     direccion = Column(String(255), nullable=False)
     telefono = Column(String(20), nullable=False)
     email = Column(String(255), unique=True, nullable=False)
@@ -35,5 +35,10 @@ class Clientes(Base):
     def to_dict(self):
         return {
             "id": self.id,
-            "nombre": self.nombre
+            "nombre": self.nombre,
+            "documento": self.documento,
+            "direccion": self.direccion,
+            "telefono": self.telefono,
+            "email": self.email,
+            "created_at": self.created_at
         }
