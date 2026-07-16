@@ -10,7 +10,7 @@ clientes_bp = Blueprint("clientes", __name__)
 @clientes_bp.route("/", methods=["GET"])
 def get_clientes():
     clientes = ClientesController.get()
-    return jsonify(clientes), 200
+    return jsonify([c.to_dict() for c in clientes]), 200
 
 
 # ===========================
