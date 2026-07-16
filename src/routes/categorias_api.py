@@ -36,7 +36,7 @@ def create_categoria():
 
     print(data)
 
-    return jsonify(data)
+    return jsonify(data), 201
 
 
 # ===========================

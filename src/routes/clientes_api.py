@@ -21,7 +21,7 @@ def get_cliente(id):
     cliente = ClientesController.get_by_id(id)
 
     if cliente:
-        return jsonify(cliente), 200
+        return jsonify(cliente.to_dict()), 200
 
     return jsonify({
         "mensaje": "Cliente no encontrado"
@@ -35,10 +35,9 @@ def get_cliente(id):
 def create_cliente():
     data = request.get_json()
 
-    cliente = ClientesController.create(data)
+    print(data)
 
-    return jsonify(cliente), 201
-
+    return jsonify(data), 201
 
 # ===========================
 # Actualizar cliente
