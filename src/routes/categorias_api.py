@@ -9,7 +9,7 @@ categorias_bp = Blueprint("categorias", __name__)
 @categorias_bp.route("/", methods=["GET"])
 def get_categorias():
     categorias = CategoriasController.get()
-    return jsonify(categorias), 200
+    return jsonify([c.to_dict() for c in categorias]), 200
 
 
 # ===========================
@@ -20,7 +20,7 @@ def get_categoria(id):
     categoria = CategoriasController.get_by_id(id)
 
     if categoria:
-        return jsonify(categoria), 200
+        return jsonify(categoria.to_dict()), 200
 
     return jsonify({
         "mensaje": "Categoría no encontrada"
@@ -34,9 +34,8 @@ def get_categoria(id):
 def create_categoria():
     data = request.get_json()
 
-    categoria = CategoriasController.create(data)
-
-    return jsonify(categoria), 201
+    categoria = CategoriasController.save(data)
+    return jsonify(categoria.to_dict()), 201
 
 
 # ===========================
@@ -49,7 +48,7 @@ def update_categoria(id):
     categoria = CategoriasController.update(id, data)
 
     if categoria:
-        return jsonify(categoria), 200
+        return jsonify(categoria.to_dict()), 200
 
     return jsonify({
         "mensaje": "Categoría no encontrada"
