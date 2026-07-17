@@ -4,7 +4,7 @@ from src.models import Base, session
 from src.models.proveedores import Proveedores
 from src.models.usuarios import Usuarios
 
-
+ 
 class Compras(Base):
     __tablename__ = 'compras'
 

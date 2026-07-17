@@ -1,0 +1,7 @@
+$kind: http-request
+name: actualizar
+url: http://127.0.0.1:5000/api/proveedores/1
+method: PUT
+headers:
+  Content-Type: application/json
+order: 4502921479118691

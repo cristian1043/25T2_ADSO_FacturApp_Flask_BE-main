@@ -1,60 +1,58 @@
-from sqlalchemy.exc import SQLAlchemyError
-
-from src.models import session
+from src.models.clientes import Clientes
 from src.models.usuarios import Usuarios
-
+ 
 
 class UsuariosController:
 
     @staticmethod
     def get():
-        return session.query(Usuarios).all()
-
+        return Usuarios.get()
 
     @staticmethod
     def get_by_id(id):
-        return session.query(Usuarios).filter_by(id=id).first()
-
+        return Usuarios.get_by_id(id)
 
     @staticmethod
-    def save(usuario):
+    def save(data):
+        usuario = Usuarios()
+        usuario.documento = data["documento"]
+        usuario.nombre = data["nombre"]
+        usuario.apellido = data["apellido"]
+        usuario.telefono = data["telefono"]
+        usuario.email = data["email"]
+        usuario.username = data["username"]
+        usuario.password = data["password"]
+        usuario.id_rol = data["id_rol"]
+        usuario.save()
+        return usuario
 
-        try:
-            session.add(usuario)
-            session.commit()
-            return usuario
+    @staticmethod
+    def update(id, data):
+        usuario = Usuarios.get_by_id(id)
 
-        except SQLAlchemyError:
-            session.rollback()
+        if usuario is None:
             return None
 
+        usuario.documento = data["documento"]
+        usuario.nombre = data["nombre"]
+        usuario.apellido = data["apellido"]
+        usuario.telefono = data["telefono"]
+        usuario.email = data["email"]
+        usuario.username = data["username"]
+        usuario.password = data["password"]
+        usuario.id_rol = data["id_rol"]
+
+        usuario.update()
+
+        return usuario
 
     @staticmethod
-    def update(usuario):
+    def delete(id):
+        usuario = Usuarios.get_by_id(id)
 
         if usuario is None:
             return False
 
-        try:
-            session.commit()
-            return True
+        usuario.delete()
+        return True
 
-        except SQLAlchemyError:
-            session.rollback()
-            return False
-
-
-    @staticmethod
-    def delete(usuario):
-
-        if usuario is None:
-            return False
-
-        try:
-            session.delete(usuario)
-            session.commit()
-            return True
-
-        except SQLAlchemyError:
-            session.rollback()
-            return False

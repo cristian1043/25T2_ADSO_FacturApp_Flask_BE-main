@@ -1,6 +1,4 @@
-from sqlalchemy.exc import SQLAlchemyError
-
-from src.models import session
+from src.models.clientes import Clientes
 from src.models.roles import Roles
 
 
@@ -8,53 +6,69 @@ class RolesController:
 
     @staticmethod
     def get():
-        return session.query(Roles).all()
-
+        return Roles.get()
 
     @staticmethod
     def get_by_id(id):
-        return session.query(Roles).filter_by(id=id).first()
-
+        return Roles.get_by_id(id)
 
     @staticmethod
-    def save(rol):
+    def save(data):
+        rol = Roles()
+        rol.nombre = data["nombre"]
+        rol.descripcion = data["descripcion"]
+        rol.save()
+        return rol
 
-        try:
-            session.add(rol)
-            session.commit()
-            return rol
+    @staticmethod
+    def update(id, data):
+        rol = Roles.get_by_id(id)
 
-        except SQLAlchemyError:
-            session.rollback()
+        if rol is None:
             return None
 
+        rol.nombre = data["nombre"]
+        rol.descripcion = data["descripcion"]
+
+        rol.update()
+
+        return rol
 
     @staticmethod
-    def update(rol):
+    def delete(id):
+        rol = Roles.get_by_id(id)
 
         if rol is None:
             return False
 
-        try:
-            session.commit()
-            return True
+        rol.delete()
+        return True
 
-        except SQLAlchemyError:
-            session.rollback()
-            return False
+        rol.nombre = data["nombre"]
+        rol.descripcion = data["descripcion"]
 
+        rol.update()
+
+        return rol
 
     @staticmethod
-    def delete(rol):
+    def delete(id):
+        rol = Roles.get_by_id(id)
 
         if rol is None:
             return False
 
-        try:
-            session.delete(rol)
-            session.commit()
-            return True
+        rol.delete()
+        return True
 
-        except SQLAlchemyError:
-            session.rollback()
+        return rol
+
+    @staticmethod
+    def delete(id):
+        rol = Roles.get_by_id(id)
+
+        if rol is None:
             return False
+
+        rol.delete()
+        return True

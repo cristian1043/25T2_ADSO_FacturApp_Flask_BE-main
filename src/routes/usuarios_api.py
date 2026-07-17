@@ -3,14 +3,14 @@ from src.controllers.usuarios_controller import UsuariosController
 
 usuarios_bp = Blueprint("usuarios", __name__)
 
-
+ 
 # ===========================
 # Obtener todos los usuarios
 # ===========================
 @usuarios_bp.route("/", methods=["GET"])
 def get_usuarios():
     usuarios = UsuariosController.get()
-    return jsonify(usuarios), 200
+    return jsonify([c.to_dict() for c in usuarios]), 200
 
 
 # ===========================
@@ -21,7 +21,7 @@ def get_usuario(id):
     usuario = UsuariosController.get_by_id(id)
 
     if usuario:
-        return jsonify(usuario), 200
+        return jsonify(usuario.to_dict()), 200
 
     return jsonify({
         "mensaje": "Usuario no encontrado"
@@ -37,7 +37,7 @@ def create_usuario():
 
     usuario = UsuariosController.create(data)
 
-    return jsonify(usuario), 201
+    return jsonify(usuario.to_dict()), 201
 
 
 # ===========================
@@ -50,7 +50,7 @@ def update_usuario(id):
     usuario = UsuariosController.update(id, data)
 
     if usuario:
-        return jsonify(usuario), 200
+        return jsonify(usuario.to_dict()), 200
 
     return jsonify({
         "mensaje": "Usuario no encontrado"

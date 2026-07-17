@@ -1,0 +1,4 @@
+$kind: http-request
+url: http://127.0.0.1:5000/api/proveedores
+method: GET
+order: 1784252674384

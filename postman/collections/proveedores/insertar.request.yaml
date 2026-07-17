@@ -1,0 +1,20 @@
+$kind: http-request
+name: insertar
+url: http://127.0.0.1:5000/api/proveedores
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \    \"nit\": \"901987654\",\r
+
+    \    \"nombre\": \"Insumos del Caribe S.A.S.\",\r
+
+    \    \"telefono\": \"3159876543\",\r
+
+    \    \"direccion\": \"Avenida Pedro de Heredia #45-10, Cartagena\",\r
+
+    \    \"email\": \"ventas@insumoscaribe.com\"\r
+
+    }"
+order: 4502155666543471

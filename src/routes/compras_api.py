@@ -2,7 +2,7 @@ from flask import Blueprint, request, jsonify
 from src.controllers.compras_controller import ComprasController
 
 compras_bp = Blueprint("compras", __name__)
-
+  
 
 # ===========================
 # Obtener todas las compras

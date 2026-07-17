@@ -10,7 +10,7 @@ roles_bp = Blueprint("roles", __name__)
 @roles_bp.route("/", methods=["GET"])
 def get_roles():
     roles = RolesController.get()
-    return jsonify(roles), 200
+    return jsonify([rol.to_dict() for rol in roles]), 200
 
 
 # ===========================
@@ -21,7 +21,7 @@ def get_rol(id):
     rol = RolesController.get_by_id(id)
 
     if rol:
-        return jsonify(rol), 200
+        return jsonify(rol.to_dict()), 200
 
     return jsonify({
         "mensaje": "Rol no encontrado"
@@ -37,7 +37,7 @@ def create_rol():
 
     rol = RolesController.create(data)
 
-    return jsonify(rol), 201
+    return jsonify(rol.to_dict()), 201
 
 
 # ===========================
@@ -50,7 +50,7 @@ def update_rol(id):
     rol = RolesController.update(id, data)
 
     if rol:
-        return jsonify(rol), 200
+        return jsonify(rol.to_dict()), 200
 
     return jsonify({
         "mensaje": "Rol no encontrado"

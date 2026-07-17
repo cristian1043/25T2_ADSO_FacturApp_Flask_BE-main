@@ -1,7 +1,7 @@
 from src.models.categorias import Categorias
 from src.models.compras import Compras
 
-
+ 
 class ComprasController:
     @staticmethod
     def get():
