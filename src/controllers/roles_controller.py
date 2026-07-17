@@ -1,6 +1,4 @@
-from src.models.clientes import Clientes
 from src.models.roles import Roles
-
 
 class RolesController:
 
