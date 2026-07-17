@@ -16,7 +16,6 @@ class ProveedoresController:
         proveedor = Proveedores()
         proveedor.nit = data["nit"]
         proveedor.nombre = data["nombre"]
-        proveedor.contacto = data["contacto"]
         proveedor.telefono = data["telefono"]
         proveedor.direccion = data["direccion"]
         proveedor.email = data["email"]
@@ -32,7 +31,6 @@ class ProveedoresController:
 
         proveedor.nit = data["nit"]
         proveedor.nombre = data["nombre"]
-        proveedor.contacto = data["contacto"]
         proveedor.telefono = data["telefono"]
         proveedor.direccion = data["direccion"]
         proveedor.email = data["email"]
