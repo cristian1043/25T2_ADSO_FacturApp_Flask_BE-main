@@ -1,0 +1,14 @@
+$kind: http-request
+name: insertar
+url: http://127.0.0.1:5000/api/roles
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \    \"nombre\": \"Administrador\",\r
+
+    \    \"descripcion\": \"Acceso completo al sistema\"\r
+
+    }"
+order: 2490526449064930
