@@ -10,7 +10,7 @@ compras_bp = Blueprint("compras", __name__)
 @compras_bp.route("/", methods=["GET"])
 def get_compras():
     compras = ComprasController.get()
-    return jsonify(compras), 200
+    return jsonify([c.to_dict() for c in compras]), 200
 
 
 # ===========================
@@ -21,7 +21,7 @@ def get_compra(id):
     compra = ComprasController.get_by_id(id)
 
     if compra:
-        return jsonify(compra), 200
+        return jsonify(compra.to_dict()), 200
 
     return jsonify({
         "mensaje": "Compra no encontrada"
@@ -37,7 +37,7 @@ def create_compra():
 
     compra = ComprasController.create(data)
 
-    return jsonify(compra), 201
+    return jsonify(compra.to_dict()), 201
 
 
 # ===========================
@@ -50,7 +50,7 @@ def update_compra(id):
     compra = ComprasController.update(id, data)
 
     if compra:
-        return jsonify(compra), 200
+        return jsonify(compra.to_dict()), 200
 
     return jsonify({
         "mensaje": "Compra no encontrada"
@@ -62,6 +62,7 @@ def update_compra(id):
 # ===========================
 @compras_bp.route("/<int:id>", methods=["DELETE"])
 def delete_compra(id):
+    
     eliminado = ComprasController.delete(id)
 
     if eliminado:
@@ -71,4 +72,4 @@ def delete_compra(id):
 
     return jsonify({
         "mensaje": "Compra no encontrada"
-    }), 404
+    }), 404 

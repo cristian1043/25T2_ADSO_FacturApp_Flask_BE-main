@@ -1,57 +1,67 @@
+from src.models.categorias import Categorias
 from src.models.compras import Compras
 
 
 class ComprasController:
-
     @staticmethod
     def get():
-        return session.query(Compras).all()
-
+        compras = Compras.get()
+        return [compra.to_dict() for compra in compras]
 
     @staticmethod
     def get_by_id(id):
-        return session.query(Compras).filter_by(id=id).first()
+        compra = Compras.get_by_id(id)
 
+        if compra:
+            return compra.to_dict()
+
+        return None
 
     @staticmethod
-    def save(compra):
+    def create(data):
 
-        try:
-            session.add(compra)
-            session.commit()
-            return compra
+        compra = Compras()
 
-        except SQLAlchemyError:
-            session.rollback()
+        compra.numero = data["numero"]
+        compra.subtotal = data["subtotal"]
+        compra.iva = data["iva"]
+        compra.descuento = data["descuento"]
+        compra.total = data["total"]
+        compra.id_proveedor = data["id_proveedor"]
+        compra.id_usuario = data["id_usuario"]
+
+        compra.save()
+
+        return compra.to_dict()
+
+    @staticmethod
+    def update(id, data):
+
+        compra = Compras.get_by_id(id)
+
+        if compra is None:
             return None
 
+        compra.numero = data["numero"]
+        compra.subtotal = data["subtotal"]
+        compra.iva = data["iva"]
+        compra.descuento = data["descuento"]
+        compra.total = data["total"]
+        compra.id_proveedor = data["id_proveedor"]
+        compra.id_usuario = data["id_usuario"]
+
+        compra.update()
+
+        return compra.to_dict()
 
     @staticmethod
-    def update(compra):
+    def delete(id):
+
+        compra = Compras.get_by_id(id)
 
         if compra is None:
             return False
 
-        try:
-            session.commit()
-            return True
+        compra.delete()
 
-        except SQLAlchemyError:
-            session.rollback()
-            return False
-
-
-    @staticmethod
-    def delete(compra):
-
-        if compra is None:
-            return False
-
-        try:
-            session.delete(compra)
-            session.commit()
-            return True
-
-        except SQLAlchemyError:
-            session.rollback()
-            return False
+        return True

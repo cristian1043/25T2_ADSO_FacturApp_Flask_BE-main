@@ -1,0 +1,6 @@
+$kind: http-request
+name: obtener por id
+url: http://127.0.0.1:5000/api/compras/
+method: GET
+examples: .resources/obtener por id.resources/examples
+order: 4055152817779777
