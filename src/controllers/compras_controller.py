@@ -32,7 +32,7 @@ class ComprasController:
 
         compra.save()
 
-        return compra.to_dict()
+        return compra
 
     @staticmethod
     def update(id, data):
