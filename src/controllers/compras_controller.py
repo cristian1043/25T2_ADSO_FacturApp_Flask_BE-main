@@ -11,8 +11,10 @@ class ComprasController:
     def get_by_id(id):
         compra = Compras.get_by_id(id)
 
-        if compra:
-            return compra.to_dict()
+        if compra is not None:
+            return None
+        
+        return compra
 
         return None
 
@@ -51,7 +53,7 @@ class ComprasController:
 
         compra.update()
 
-        return compra.to_dict()
+        return compra
 
     @staticmethod
     def delete(id):
