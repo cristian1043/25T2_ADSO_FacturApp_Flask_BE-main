@@ -14,13 +14,14 @@ class UsuariosController:
     @staticmethod
     def save(data):
         usuario = Usuarios()
+        usuario.tipo_documento = data["tipo_documento"]
         usuario.documento = data["documento"]
         usuario.nombre = data["nombre"]
         usuario.apellido = data["apellido"]
         usuario.telefono = data["telefono"]
         usuario.email = data["email"]
         usuario.username = data["username"]
-        usuario.password = data["password"]
+        usuario.password_hash = data["password_hash"]
         usuario.id_rol = data["id_rol"]
         usuario.save()
         return usuario
@@ -31,14 +32,15 @@ class UsuariosController:
 
         if usuario is None:
             return None
-
+        
+        usuario.tipo_documento = data["tipo_documento"]
         usuario.documento = data["documento"]
         usuario.nombre = data["nombre"]
         usuario.apellido = data["apellido"]
         usuario.telefono = data["telefono"]
         usuario.email = data["email"]
         usuario.username = data["username"]
-        usuario.password = data["password"]
+        usuario.password_hash = data["password_hash"]
         usuario.id_rol = data["id_rol"]
 
         usuario.update()

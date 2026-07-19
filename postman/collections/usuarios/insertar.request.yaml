@@ -6,15 +6,21 @@ body:
   type: json
   content: "{\r
 
+    \    \"tipo_documento\": \"CC\",\r
+
+    \    \"documento\": \"1001234567\",\r
+
     \    \"nombre\": \"Cristian\",\r
 
-    \    \"apellido\": \"Jiménez\",\r
+    \    \"apellido\": \"Jimenez\",\r
 
     \    \"telefono\": \"3001234567\",\r
 
     \    \"email\": \"cristian@pymesoft.com\",\r
 
-    \    \"password\": \"123456\",\r
+    \    \"username\": \"cristianjg\",\r
+
+    \    \"password_hash\": \"123456\",\r
 
     \    \"id_rol\": 1\r
 
