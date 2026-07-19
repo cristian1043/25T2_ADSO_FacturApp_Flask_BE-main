@@ -1,6 +1,3 @@
-from sqlalchemy.exc import SQLAlchemyError
-
-from src.models import session
 from src.models.facturas import Facturas
 
 
@@ -8,53 +5,68 @@ class FacturasController:
 
     @staticmethod
     def get():
-        return session.query(Facturas).all()
-
+        return Facturas.get()
 
     @staticmethod
     def get_by_id(id):
-        return session.query(Facturas).filter_by(id=id).first()
-
-
-    @staticmethod
-    def save(factura):
-
-        try:
-            session.add(factura)
-            session.commit()
-            return factura
-
-        except SQLAlchemyError:
-            session.rollback()
+        return Facturas.get_by_id(id)
+    
+        if factura is None:
             return None
+        
+        return factura
 
 
     @staticmethod
-    def update(factura):
+    def create(data):
+
+        factura = Facturas()
+
+        factura.numero = data["numero"]
+        factura.fecha = data["fecha"]
+        factura.subtotal = data["subtotal"]
+        factura.iva = data["iva"]
+        factura.descuento = data["descuento"]
+        factura.total = data["total"]
+        factura.id_cliente = data["id_cliente"]
+        factura.id_usuario = data["id_usuario"]
+        factura.id_metodo_pago = data["id_metodo_pago"]
+
+        factura.save()
+
+        return factura
+        
+    @staticmethod
+    def update(id, data):
+
+        factura = Facturas.get_by_id(id)
 
         if factura is None:
             return False
 
-        try:
-            session.commit()
-            return True
+        factura.numero = data["numero"]
+        factura.fecha = data["fecha"]
+        factura.subtotal = data["subtotal"]
+        factura.iva = data["iva"]
+        factura.descuento = data["descuento"]
+        factura.total = data["total"]
+        factura.id_cliente = data["id_cliente"]
+        factura.id_usuario = data["id_usuario"]
+        factura.id_metodo_pago = data["id_metodo_pago"]
 
-        except SQLAlchemyError:
-            session.rollback()
-            return False
 
+        factura.update()
+        
+        return True
 
     @staticmethod
-    def delete(factura):
+    def delete(id):
 
+        factura = Facturas.get_by_id(id)
+       
         if factura is None:
             return False
-
-        try:
-            session.delete(factura)
-            session.commit()
-            return True
-
-        except SQLAlchemyError:
-            session.rollback()
-            return False
+        
+        factura.delete()
+        
+        return True

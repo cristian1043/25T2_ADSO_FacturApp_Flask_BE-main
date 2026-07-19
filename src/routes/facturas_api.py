@@ -10,18 +10,18 @@ facturas_bp = Blueprint("facturas", __name__)
 @facturas_bp.route("/", methods=["GET"])
 def get_facturas():
     facturas = FacturasController.get()
-    return jsonify(facturas), 200
+    return jsonify([c.to_dict() for c in facturas]), 200
 
 
 # ===========================
-# Obtener una factura
+# Obtener una factura por ID
 # ===========================
 @facturas_bp.route("/<int:id>", methods=["GET"])
 def get_factura(id):
     factura = FacturasController.get_by_id(id)
 
     if factura:
-        return jsonify(factura), 200
+        return jsonify(factura.to_dict()), 200
 
     return jsonify({
         "mensaje": "Factura no encontrada"
@@ -37,7 +37,7 @@ def create_factura():
 
     factura = FacturasController.create(data)
 
-    return jsonify(factura), 201
+    return jsonify(factura.to_dict()), 201
 
 
 # ===========================
@@ -50,7 +50,7 @@ def update_factura(id):
     factura = FacturasController.update(id, data)
 
     if factura:
-        return jsonify(factura), 200
+        return jsonify(factura.to_dict()), 200
 
     return jsonify({
         "mensaje": "Factura no encontrada"

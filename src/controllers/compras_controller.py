@@ -2,6 +2,7 @@ from src.models.compras import Compras
 
  
 class ComprasController:
+    
     @staticmethod
     def get():
         return Compras.get()
