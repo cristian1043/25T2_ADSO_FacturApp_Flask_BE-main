@@ -1,6 +1,3 @@
-from sqlalchemy.exc import SQLAlchemyError
-
-from src.models import session
 from src.models.metodos_pago import MetodosPago
 
 
@@ -8,53 +5,53 @@ class MetodosPagoController:
 
     @staticmethod
     def get():
-        return session.query(MetodosPago).all()
-
-
+        return MetodosPago.get()
+ 
     @staticmethod
     def get_by_id(id):
-        return session.query(MetodosPago).filter_by(id=id).first()
+        return MetodosPago.get_by_id(id)
 
+        if metodo_pago is None:
+            return None
+        
+        return metodo_pago
+    
+    @staticmethod
+    def create(id, data):
+
+        metodo_pago = MetodosPago()
+        
+        metodo_pago.nombre = data["nombre"]
+        metodo_pago.descripcion = data.get("descripcion", None)
+        
+        metodo_pago.save()
+        
+        return metodo_pago
 
     @staticmethod
-    def save(metodo_pago):
+    def update(id, data):
 
-        try:
-            session.add(metodo_pago)
-            session.commit()
-            return metodo_pago
+        metodo_pago = MetodosPago.get_by_id(id)
 
-        except SQLAlchemyError:
-            session.rollback()
+        if metodo_pago is None:
             return None
 
+        metodo_pago.nombre = data["nombre"]
+        metodo_pago.descripcion = data.get("descripcion", None)
+
+        metodo_pago.update()
+
+        return metodo_pago
+
 
     @staticmethod
-    def update(metodo_pago):
+    def delete(id):
+
+        metodo_pago = MetodosPago.get_by_id(id)
 
         if metodo_pago is None:
             return False
 
-        try:
-            session.commit()
-            return True
-
-        except SQLAlchemyError:
-            session.rollback()
-            return False
-
-
-    @staticmethod
-    def delete(metodo_pago):
-
-        if metodo_pago is None:
-            return False
-
-        try:
-            session.delete(metodo_pago)
-            session.commit()
-            return True
-
-        except SQLAlchemyError:
-            session.rollback()
-            return False
+        metodo_pago.delete()
+        
+        return True
