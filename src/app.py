@@ -34,7 +34,7 @@ from src.routes import (
     detalle_facturas_bp, 
     compras_bp, 
     detalle_compras_bp,
-    metodo_pago_bp
+    metodos_pago_bp
 )
 
 
@@ -50,7 +50,7 @@ app.register_blueprint(facturas_bp, url_prefix="/api/facturas")
 app.register_blueprint(detalle_facturas_bp, url_prefix="/api/detalle_facturas")
 app.register_blueprint(compras_bp, url_prefix="/api/compras")
 app.register_blueprint(detalle_compras_bp, url_prefix="/api/detalle_compras")
-app.register_blueprint(metodo_pago_bp, url_prefix="/api/metodos_pago")
+app.register_blueprint(metodos_pago_bp, url_prefix="/api/metodos_pago")
 
 if __name__ == '__main__':
     app.run(debug=True)
